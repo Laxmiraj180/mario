@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.mario.deploymentName }}
+spec:
+  replicas: {{ .Values.mario.replicas }}
+  selector:
+    matchLabels:
+      app: mario
+  template:
+    metadata:
+      labels:
+        app: mario
+    spec:
+      containers:
+      - name: mario-container
+        image: {{ .Values.mario.image }}       
+        ports:
+        - containerPort: 80
