@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mario-deployment
+  name: {{ .Values.mario.deploymentName }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.mario.replicas }}
   selector:
     matchLabels:
       app: mario
@@ -13,8 +13,7 @@ spec:
         app: mario
     spec:
       containers:
-      - name: mario
-        image: pengbai/docker-supermario:latest
+      - name: mario-container
+        image: {{ .Values.mario.image }}       
         ports:
-        - containerPort: 8080
-
+        - containerPort: 80
